@@ -4,7 +4,7 @@
 ;; Version: 0.0.1
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
-;;; Commentary
+;;; Commentary:
 
 ;;; Code:
 
@@ -24,7 +24,15 @@
 (defun jj-status ()
   ""
   (interactive)
-  )
+  "IOU")
+
+;;;###autoload
+(defun jj-dashboard ()
+  "Opens and refreshes the project's jj dashboard.
+
+The dashboard shows the combined output of jj status, jj log and jj branch list."
+  (interactive)
+  "IOU")
 
 
 (provide 'jujutsushi)
