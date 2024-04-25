@@ -1,6 +1,8 @@
 # Jujutsushi
 ## An Emacs UI to jujutsu
 
+Also provide `vc-jujutsushi`. This buys us project.el support try the 'vc'
+project type.
 
 # Pro Tips
 
