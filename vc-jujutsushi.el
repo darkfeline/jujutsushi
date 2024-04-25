@@ -28,7 +28,7 @@
 ;; - dir-printer (fileinfo)
 ;; - status-fileinfo-extra (file)
 ;; * working-revision (file)
-;; * checkout-model (files)
+;; * checkout-model (files): ✔
 ;; - mode-line-string (file)
 ;;
 ;; STATE-CHANGING FUNCTIONS
@@ -106,11 +106,12 @@
 (require 'vc)
 
 (defgroup vc-jujutsu nil
-  "VC JJ backend."
+  "VC jujutsu backend."
   :group 'vc)
 
-;; put into
-;; vc-handled-backends
+(defcustom vc-jj-program "jj"
+  "Name of the jujutsu executable."
+  :type 'string)
 
 (defun vc-jj-revision-granularity () 'repository)
 (defun vc-git-checkout-model (_files) 'implicit)
@@ -125,9 +126,19 @@
   (expand-file-name ".gitignore"
                     (vc-git-root file)))
 
+(defun vc-jj-command (buffer okstatus file-or-list &rest flags)
+  "A wrapper around `vc-do-command' for use in vc-jujutsushi.el"
+  (apply #'vc-do-command (or buffer "*vc*") okstatus vc-jj-program))
+
 (defun vc-jj-create-repo ()
   ;; TODO: Implement this. We need to call `jj init default-default-directory'
   ;; (vc-jj-command "init")
   )
+
+;;;###autoload
+(add-to-list 'vc-handled-backends 'jj)
+
+;;;###autoload
+(add-to-list 'vc-directory-exclusion-list ".jj")
 
 (provide 'jujutsushi-vc)
