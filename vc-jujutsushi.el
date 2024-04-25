@@ -33,7 +33,7 @@
 ;;
 ;; STATE-CHANGING FUNCTIONS
 ;;
-;; * create-repo ()
+;; * create-repo (): ✔
 ;; * register (files &optional comment)
 ;; - responsible-p (file)
 ;; - receive-file (file rev)
@@ -128,12 +128,11 @@
 
 (defun vc-jj-command (buffer okstatus file-or-list &rest flags)
   "A wrapper around `vc-do-command' for use in vc-jujutsushi.el"
-  (apply #'vc-do-command (or buffer "*vc*") okstatus vc-jj-program))
+  ;; TODO: Should I pass `--color never' to flags as well?
+  (apply #'vc-do-command (or buffer "*vc*") okstatus vc-jj-program (cons "--no-pager" flags)))
 
 (defun vc-jj-create-repo ()
-  ;; TODO: Implement this. We need to call `jj init default-default-directory'
-  ;; (vc-jj-command "init")
-  )
+  (vc-jj-command "init"))
 
 ;;;###autoload
 (add-to-list 'vc-handled-backends 'jj)
