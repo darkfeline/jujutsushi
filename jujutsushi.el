@@ -10,6 +10,7 @@
 
 (require 'cl-lib)
 (require 'project)
+(require 'with-editor)
 
 (defgroup jujutsushi nil
   "Emacs interface to jujutsu version control system."
@@ -17,8 +18,15 @@
 
 ;;;###autoload
 (defun jj-describe ()
-  ;; Use with-editor. call jj describe
-  )
+  "Open a buffer to describe the current revision."
+  ;; TODO: Allow passing the revision to describe as a parameter.
+  ;; TODO: Default revision-at-point, default to @ if there is no revision
+  (interactive)
+  (with-editor-async-shell-command
+   (mapconcat #'shell-quote-argument
+              (list "jj" "describe" "-r" "@") " ")
+   ;; Set JJ_EDITOR so that we override the ui.editor setting.
+   nil nil "JJ_EDITOR"))
 
 ;;;###autoload
 (defun jj-status ()
