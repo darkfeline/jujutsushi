@@ -134,9 +134,11 @@
 (defun vc-jj-create-repo ()
   (vc-jj-command "init"))
 
-(defun vc-jj-responsible-p (file)
+(defun vc-jj-root (file)
   "Return t if FILE is under version control with jujutsu."
   (vc-find-root file ".jj"))
+
+(defalias 'vc-jj-responsible-p #'vc-jj-root)
 
 ;;;###autoload
 (add-to-list 'vc-handled-backends 'jj)
