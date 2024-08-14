@@ -32,6 +32,9 @@
 (defconst jj--dashboard-buffer "*jj-dashboard*"
   "Name of the buffer used to display `jj-dashboard' output.")
 
+
+;; TODO: Use magit-section to delimit output
+;; TODO: Annotate change-id's with an overlay
 ;;;###autoload
 (defun jj-dashboard ()
   "Opens and refreshes the project's jj dashboard.
