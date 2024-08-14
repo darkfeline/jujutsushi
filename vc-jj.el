@@ -114,8 +114,8 @@
   :type 'string)
 
 (defun vc-jj-revision-granularity () 'repository)
-(defun vc-git-checkout-model (_files) 'implicit)
-(defun vc-git-update-on-retrieve-tag () nil)
+(defun vc-jj-checkout-model (_files) 'implicit)
+(defun vc-jj-update-on-retrieve-tag () nil)
 
 (defun vc-jj-root (file)
   (vc-find-root file ".jj"))
