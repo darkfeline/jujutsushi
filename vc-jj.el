@@ -35,7 +35,7 @@
 ;;
 ;; * create-repo (): ✔
 ;; * register (files &optional comment)
-;; - responsible-p (file)
+;; - responsible-p (file): ✔
 ;; - receive-file (file rev)
 ;; - unregister (file)
 ;; * checkin (files comment &optional rev)
@@ -133,6 +133,10 @@
 
 (defun vc-jj-create-repo ()
   (vc-jj-command "init"))
+
+(defun vc-jj-responsible-p (file)
+  "Return t if FILE is under version control with jujutsu."
+  (vc-find-root file ".jj"))
 
 ;;;###autoload
 (add-to-list 'vc-handled-backends 'jj)
