@@ -1,4 +1,4 @@
-;; jujutsuhsi-vc.el --- Teach vc about jujutsu projects -*- lexical-binding: t -*-
+;; vc-jj.el --- Teach vc about jujutsu projects -*- lexical-binding: t -*-
 
 ;; Copyright (©) 2024 Javier Olaechea <pirata@gmail.com>
 ;; Version: 0.0.1
@@ -105,7 +105,7 @@
 (require 'cl-lib)
 (require 'vc)
 
-(defgroup vc-jujutsu nil
+(defgroup vc-jj nil
   "VC jujutsu backend."
   :group 'vc)
 
@@ -127,7 +127,7 @@
                     (vc-git-root file)))
 
 (defun vc-jj-command (buffer okstatus file-or-list &rest flags)
-  "A wrapper around `vc-do-command' for use in vc-jujutsushi.el"
+  "A wrapper around `vc-do-command' for use in vc-jujutsu.el"
   ;; TODO: Should I pass `--color never' to flags as well?
   (apply #'vc-do-command (or buffer "*vc*") okstatus vc-jj-program (cons "--no-pager" flags)))
 
@@ -140,4 +140,4 @@
 ;;;###autoload
 (add-to-list 'vc-directory-exclusion-list ".jj")
 
-(provide 'jujutsushi-vc)
+(provide 'vc-jj)
