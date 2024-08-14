@@ -28,11 +28,9 @@
    ;; Set JJ_EDITOR so that we override the ui.editor setting.
    nil nil "JJ_EDITOR"))
 
-;;;###autoload
-(defun jj-status ()
-  ""
-  (interactive)
-  "IOU")
+;; TODO: Add the project name to the buffer name.
+(defconst jj--dashboard-buffer "*jj-dashboard*"
+  "Name of the buffer used to display `jj-dashboard' output.")
 
 ;;;###autoload
 (defun jj-dashboard ()
@@ -40,7 +38,16 @@
 
 The dashboard shows the combined output of jj status, jj log and jj branch list."
   (interactive)
-  "IOU")
+  (with-current-buffer (get-buffer-create jj--dashboard-buffer)
+    (erase-buffer)
+    (insert "jj status\n")
+    (insert (shell-command-to-string "jj status"))
+    (insert "\n\njj branch list\n")
+    (insert (shell-command-to-string "jj branch list"))
+    (insert "\n\njj log\n")
+    (insert (shell-command-to-string "jj log"))
+    (goto-char (point-min))
+    (display-buffer (current-buffer))))
 
 
 (provide 'jujutsushi)
