@@ -21,7 +21,7 @@
 ;;
 ;; STATE-QUERYING FUNCTIONS
 ;;
-;; * registered (file)
+;; * registered (file): ✔
 ;; * state (file)
 ;; - dir-status-files (dir files update-function)
 ;; - dir-extra-headers (dir)
@@ -139,6 +139,13 @@
   (vc-find-root file ".jj"))
 
 (defalias 'vc-jj-responsible-p #'vc-jj-root)
+
+(defun vc-jj-registered (file)
+  "Check whether FILE is registered with jujutsu."
+  (when-let ((dir (vc-jj-root file)))
+    (with-temp-buffer
+      ;; If something is output then the file is registered.
+      (not (string= "" (shell-command-to-string (format "jj file list %s" file)))))))
 
 ;;;###autoload
 (add-to-list 'vc-handled-backends 'jj)
