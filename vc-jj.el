@@ -22,7 +22,7 @@
 ;; STATE-QUERYING FUNCTIONS
 ;;
 ;; * registered (file): ✔
-;; * state (file)
+;; * state (file): ✔
 ;; - dir-status-files (dir files update-function)
 ;; - dir-extra-headers (dir)
 ;; - dir-printer (fileinfo)
@@ -146,6 +146,43 @@
     (with-temp-buffer
       ;; If something is output then the file is registered.
       (not (string= "" (shell-command-to-string (format "jj file list %s" file)))))))
+
+;; The possible states are exhaustively listed in `vc-state'. For
+;; jujutsu the ones that make sense are:
+;;
+;; - up-to-date
+;; - edited
+;; - added
+;; - removed
+;; - conflict
+(defun vc-jj-state (file)
+  ;; = Current implementation stragey
+  ;;
+  ;; We run jj show -r @ -s. Search for the file list. We do that by
+  ;; looking for the line after the second empty line. The file list
+  ;; will be printed as follows:
+  ;;
+  ;; A foo.el -- added
+  ;; M foo.el -- edited
+  ;; D foo.el -- removed
+  ;;
+  ;; If the file is not mentioned then it is `up-to-date'
+  ;;
+  ;; TODO: How do we detect conflicts?
+  ;; TODO: Evaluate if we can use templates to enable structured output that it is easier to parse.
+  ;; TODO: Setup test cases using jj op log
+
+  (with-temp-buffer
+    (call-process "jj" nil t nil "show" "-r" "@" "-s")
+    (goto-char (point-max))
+    (forward-line -2)
+    ;; Check that we are looking at an empty line
+    (when (looking-at "^$")
+      (forward-line 1)
+      (pcase (string-to-char (buffer-substring-no-properties (point) (1+ (point))))
+        (?A 'added)
+        (?M 'edited)
+        (?D 'removed)))))
 
 ;;;###autoload
 (add-to-list 'vc-handled-backends 'jj)
