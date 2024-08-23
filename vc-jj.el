@@ -27,7 +27,7 @@
 ;; - dir-extra-headers (dir)
 ;; - dir-printer (fileinfo)
 ;; - status-fileinfo-extra (file)
-;; * working-revision (file)
+;; * working-revision (file): ✔
 ;; * checkout-model (files): ✔
 ;; - mode-line-string (file)
 ;;
@@ -183,6 +183,21 @@
         (?A 'added)
         (?M 'edited)
         (?D 'removed)))))
+
+
+;; = Current implementation
+;;
+;; We need to run `jj st' and look for a line that starts with Working copy : $change-id
+;; $ jj st
+;; The working copy is clean
+;; Working copy : qrumvnvn 31fe04cc (empty) (no description set)
+;; Parent commit: lvzwqkuy 3a103eef default | Implement vc-jj-state
+(defun vc-jj-working-revision (_file)
+  (with-temp-buffer
+    (call-process "jj" nil t nil "st")
+    (goto-char (point-min))
+    (when (re-search-forward "Working copy : \\([^ \t\n]+\\)" nil t)
+      (match-string 1))))
 
 ;;;###autoload
 (add-to-list 'vc-handled-backends 'jj)
