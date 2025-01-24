@@ -3,5 +3,5 @@
   '((emacs "29.3")
     (with-editor "3.3.4")
     (project "0.11.1"))
-  :homepage "https://git.sr.ht/~puercopop/jujutsushi"
+  :homepage "https://github.com/darkfeline/jujutsushi"
   :keywords '("vc" "tools"))
