@@ -1,7 +1,6 @@
 ;;; vc-jj.el --- Teach vc about jujutsu projects -*- lexical-binding: t -*-
 
 ;; Copyright (©) 2024 Javier Olaechea <pirata@gmail.com>
-;; Version: 0.0.1
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:
@@ -206,3 +205,4 @@
 (add-to-list 'vc-directory-exclusion-list ".jj")
 
 (provide 'vc-jj)
+;; vc-jj ends here
