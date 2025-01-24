@@ -160,7 +160,7 @@
 ;; - removed
 ;; - conflict
 (defun vc-jj-state (file)
-  ;; = Current implementation stragey
+  ;; = Current implementation strategy
   ;;
   ;; We run jj show -r @ -s. Search for the file list. We do that by
   ;; looking for the line after the second empty line. The file list
@@ -187,7 +187,6 @@
         (?A 'added)
         (?M 'edited)
         (?D 'removed)))))
-
 
 ;; = Current implementation
 ;;
