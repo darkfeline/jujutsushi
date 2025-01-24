@@ -1,6 +1,11 @@
 ;;; vc-jj.el --- Teach vc about jujutsu projects -*- lexical-binding: t -*-
 
-;; Copyright (©) 2024 Javier Olaechea <pirata@gmail.com>
+;; Copyright (C) 2024 Javier Olaechea <pirata@gmail.com>
+
+;; Version: 0.1.0
+;; Package-Requires: ((emacs "29.3"))
+;; Keywords: vc, tools
+;; URL: https://github.com/darkfeline/jujutsushi
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:
