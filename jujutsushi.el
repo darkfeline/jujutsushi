@@ -1,7 +1,6 @@
-;; jujutsuhsi.el --- Bring jj into your domain expansion -*- lexical-binding: t -*-
+;; jujutsushi.el --- Bring jj into your domain expansion -*- lexical-binding: t -*-
 
 ;; Copyright (©) 2024 Javier Olaechea <pirata@gmail.com>
-;; Version: 0.0.1
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:
@@ -52,5 +51,5 @@ The dashboard shows the combined output of jj status, jj log and jj branch list.
     (goto-char (point-min))
     (display-buffer (current-buffer))))
 
-
 (provide 'jujutsushi)
+;;; jujutsushi ends here
