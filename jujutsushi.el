@@ -1,6 +1,10 @@
 ;; jujutsushi.el --- Bring jj into your domain expansion -*- lexical-binding: t -*-
 
 ;; Copyright (©) 2024 Javier Olaechea <pirata@gmail.com>
+;; Version: 0.1.0
+;; Package-Requires: ((emacs "29.3") (with-editor "3.3.4") (project "0.11.1"))
+;; Keywords: vc, tools
+;; URL: https://github.com/darkfeline/jujutsushi
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:
